@@ -1,0 +1,19 @@
+{
+  "uuid": "b3f34c89-8027-40c4-b912-393133bfc8a9",
+  "shortName": "tennis-poc-c",
+  "longName": "tennis-poc-c",
+  "companyName": "Leeloo Inc.",
+  "versionLabel": "1.0",
+  "sdkVersion": "3",
+  "targetPlatforms": ["aplite", "basalt", "chalk"],
+  "enableMultiJS": true,
+  "watchapp": {
+    "watchface": false
+  },
+  "appKeys": {
+    "dummy": 0
+  },
+  "resources": {
+    "media": []
+  }
+}

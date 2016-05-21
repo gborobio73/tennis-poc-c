@@ -1,0 +1,8 @@
+TARGET = Tests.exe
+
+SOURCES = Tests.c MatchScore.c ScoreCalculator.c
+
+all: $(TARGET)
+
+$(TARGET):$(SOURCES)
+        cl $**
