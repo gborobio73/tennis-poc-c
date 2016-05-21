@@ -1,5 +1,8 @@
 #include <stdbool.h>
 
+#ifndef SCORE_H
+#define SCORE_H
+
 typedef char* Point;
 
 typedef struct
@@ -12,3 +15,5 @@ typedef struct
     Point points [2];
 
 } Score;
+
+#endif
