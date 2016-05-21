@@ -23,6 +23,8 @@ void init_match_schore(int who_starts_serving){
     match_score.scores[current_score]->games[you] = 0;
     match_score.scores[current_score]->points[opp]=love;
     match_score.scores[current_score]->points[you]=love;
+    match_score.scores[current_score]->tie_break_points[opp]=0;
+    match_score.scores[current_score]->tie_break_points[you]=0;
 }
 
 void oponentPoint(){    

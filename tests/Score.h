@@ -13,6 +13,7 @@ typedef struct
     int sets [2];
     int games [2];
     Point points [2];
+    int tie_break_points [2];
 
 } Score;
 

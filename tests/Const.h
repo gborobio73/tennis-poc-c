@@ -4,5 +4,5 @@
 #define love "0"
 #define fifteen "15"
 #define thirty "30"
-#define fourty "40"
+#define forty "40"
 #define ad "Ad"
