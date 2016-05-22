@@ -285,7 +285,7 @@ void one_set_all_test(){
     end_match();
 }
 
-void match_is_over(){
+void match_is_over_test(){
     init_match_schore(you);
 
     make_game_for(opp);
@@ -319,9 +319,40 @@ void match_is_over(){
     Score* score = get_current_score();
     if (score->match_is_over == true)
     {
-        printf("*** match_is_over PASSED \n"); 
+        printf("*** match_is_over_test PASSED \n"); 
     }else{
-        printf("*** match_is_over FAILED match_is_over %s \n", score->match_is_over ? "true" : "false"); 
+        printf("*** match_is_over_test FAILED match_is_over %s \n", score->match_is_over ? "true" : "false"); 
+
+    }
+    end_match();
+}
+
+void cancel_last_point_test(){
+    init_match_schore(you);
+    make_game_for(you);
+    make_game_for(opp);
+
+    oponentPoint();    
+    yourPoint();
+    yourPoint();
+    yourPoint();
+
+    Score* previous_score = get_current_score();
+
+    oponentPoint();
+    oponentPoint();
+    // printf("*** cancel_last_point_test scores %d \n", amount_of_scores()); 
+    cancel_last_point();
+    cancel_last_point();
+    // previous_scoreintf("*** cancel_last_point_test scores %d \n", amount_of_scores()); 
+    Score* score = get_current_score();
+
+    if (score->points[opp] == previous_score->points[opp] && 
+        score->points[you] == previous_score->points[you])
+    {
+        printf("*** cancel_last_point_test PASSED \n"); 
+    }else{
+        printf("*** cancel_last_point_test FAILED points opp %s you %s \n", score->points[you], previous_score->points[you]); 
 
     }
     end_match();
@@ -341,6 +372,7 @@ int main(void)
     seven_six_games_test();
     who_serves_test();
     one_set_all_test();
-    match_is_over();
+    match_is_over_test();
+    cancel_last_point_test();
     printf("End of tests.\n");
 }

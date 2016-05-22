@@ -52,6 +52,18 @@ Score* get_current_score(){
     return match_score.scores[current_score];
 }
 
+void cancel_last_point(){
+    if (current_score > 0)
+    {
+        free(match_score.scores[current_score]);
+        current_score--;
+    }    
+}
+
+int amount_of_scores(){
+    return current_score;
+}
+
 void end_match(){
     //printf("end_match start \n");
     for (int i = 0; i <= current_score; ++i)

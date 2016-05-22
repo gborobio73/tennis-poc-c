@@ -13,6 +13,7 @@ void end_match();
 void oponentPoint();
 void yourPoint();
 Score* get_current_score();
-Score* get_previous_score();
+void cancel_last_point();
+int amount_of_scores();
 
 #endif
