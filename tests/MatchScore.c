@@ -16,6 +16,7 @@ void init_match_schore(int who_starts_serving){
 
     match_score.scores[current_score] = (Score *)malloc(sizeof(Score));
     match_score.scores[current_score]->is_tie_break = false;
+    match_score.scores[current_score]->who_serves = who_starts_serving;
     match_score.scores[current_score]->match_is_over = false;
     match_score.scores[current_score]->sets[opp] = 0;
     match_score.scores[current_score]->sets[you] = 0;

@@ -4,6 +4,7 @@
 
 #include "MatchScore.h"
 #include "Const.h"
+#include "TestHelper.h"
 
 void opponent_is_not_you(){
     int inverted_you = !you;
@@ -122,11 +123,14 @@ void advantage_test(){
     //printf("*** fifteen_all_test ENDED\n\n");
 }
 
+
 void tie_break_test(){
     init_match_schore(opp);
 
-    Score* current_score = get_current_score();
-    current_score->is_tie_break=true;
+    // Score* current_score = get_current_score();
+    // current_score->is_tie_break=true;
+
+    build_tie_break();
 
     yourPoint();
     oponentPoint();
@@ -152,16 +156,191 @@ void tie_break_test(){
     end_match();
 }
 
+void five_four_games_test(){
+    init_match_schore(you);
+
+    make_game_for(opp);
+    make_game_for(opp);
+    make_game_for(you);
+    make_game_for(opp);
+    make_game_for(you);
+    make_game_for(opp);
+    make_game_for(opp);
+    make_game_for(you);
+    make_game_for(you);
+
+    Score* score = get_current_score();
+    if (score->games[opp]== 5 && score->games[you] ==4)
+    {
+        printf("*** five_four_games_test PASSED \n"); 
+    }else{
+        printf("*** five_four_games_test FAILED opp %d you %d \n", score->games[opp], score->games[you]); 
+
+    }
+    end_match();
+}
+
+void seven_six_games_test(){
+    init_match_schore(you);
+
+    make_game_for(opp);
+    make_game_for(opp);
+    make_game_for(you);
+    make_game_for(opp);
+    make_game_for(you);
+    make_game_for(opp);
+    make_game_for(opp);
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(opp);
+    make_game_for(you); //6-6
+
+    yourPoint();
+    oponentPoint();
+    yourPoint();
+    oponentPoint();
+    oponentPoint();
+    oponentPoint();
+    yourPoint();
+    yourPoint();
+    yourPoint();
+    oponentPoint();
+    yourPoint();
+    oponentPoint();
+    oponentPoint();
+    yourPoint();
+    yourPoint();    // 8-7  
+
+    Score* score = get_current_score();
+    // printf("*** seven_six_games_test GAMES opp %d you %d \n", score->games[opp], score->games[you]);
+    // printf("*** seven_six_games_test TBPOINTS opp %d you %d \n", score->tie_break_points[opp], score->tie_break_points[you]);
+    if (score->games[opp]== 6 && score->games[you] ==6)
+    {
+        yourPoint();
+        score = get_current_score();
+        if (score->sets[you]== 1 )
+        {
+            printf("*** seven_six_games_test PASSED \n"); 
+        }else{
+            printf("*** seven_six_games_test FAILED sets opp %d you %d \n", score->sets[opp], score->sets[you]);
+        }
+        
+    }else{
+        printf("*** (2) seven_six_games_test FAILED games opp %d you %d \n", score->games[opp], score->games[you]); 
+
+    }
+    end_match();
+}
+
+void who_serves_test(){
+    init_match_schore(you);
+
+    make_game_for(opp);
+    make_game_for(opp);
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(you);
+    
+    Score* score = get_current_score();
+    if (score->who_serves== opp)
+    {
+        printf("*** who_serves_test PASSED \n"); 
+    }else{
+        printf("*** who_serves_test FAILED who_serves %d \n", score->who_serves); 
+
+    }
+    end_match();
+}
+
+void one_set_all_test(){
+    init_match_schore(you);
+
+    make_game_for(opp);
+    make_game_for(opp);
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(opp);
+    make_game_for(opp);
+    make_game_for(opp);
+    make_game_for(opp);
+
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(opp);
+    make_game_for(you);
+    make_game_for(you);
+    
+    Score* score = get_current_score();
+    if (score->sets[opp] == 1 && score->sets[you]==1)
+    {
+        printf("*** one_set_all_test PASSED \n"); 
+    }else{
+        printf("*** one_set_all_test FAILED opp %d you %d \n", score->sets[opp], score->sets[you]); 
+
+    }
+    end_match();
+}
+
+void match_is_over(){
+    init_match_schore(you);
+
+    make_game_for(opp);
+    make_game_for(opp);
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(opp);
+    make_game_for(opp);
+    make_game_for(opp);
+    make_game_for(opp);
+
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(opp);
+    make_game_for(you);
+    make_game_for(you);
+
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(opp);
+    make_game_for(opp);
+    make_game_for(opp);
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(you);
+    make_game_for(you);
+    
+    Score* score = get_current_score();
+    if (score->match_is_over == true)
+    {
+        printf("*** match_is_over PASSED \n"); 
+    }else{
+        printf("*** match_is_over FAILED match_is_over %s \n", score->match_is_over ? "true" : "false"); 
+
+    }
+    end_match();
+}
+
 int main(void)
 {    
     printf("Running tests.\n");
-    // opponent_is_not_you();
-    // who_starts_serving_test();
-    // opponent_point_test();
-    // fifteen_all_test();
-    //forty_fifteen_test();
-    // advantage_test();
+    opponent_is_not_you();
+    who_starts_serving_test();
+    opponent_point_test();
+    fifteen_all_test();
+    forty_fifteen_test();
+    advantage_test();
     tie_break_test();
-    //printf("%s \n", ad);
+    five_four_games_test();
+    seven_six_games_test();
+    who_serves_test();
+    one_set_all_test();
+    match_is_over();
     printf("End of tests.\n");
 }

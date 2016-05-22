@@ -1,4 +1,6 @@
 #include "Score.h"
+#ifndef MATCHSCORE_H
+#define MATCHSCORE_H
 
 typedef struct
 {
@@ -11,3 +13,6 @@ void end_match();
 void oponentPoint();
 void yourPoint();
 Score* get_current_score();
+Score* get_previous_score();
+
+#endif
