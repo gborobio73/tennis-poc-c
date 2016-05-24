@@ -1,5 +1,5 @@
-#include "Const.h"
-#include "MatchScore.h"
+#include "../src/Const.h"
+#include "../src/MatchScore.h"
 
 void make_game_for(int who_gets_the_game){
     if (who_gets_the_game == opp)
@@ -47,6 +47,6 @@ void build_tie_break(){
 }
 
 void make_set_for(int who_gets_the_set){
-    
+
 }
 

@@ -4,11 +4,10 @@
 
 typedef struct
 {
-    int who_starts_serving;
     Score* scores [100];
 } MatchScore;
 
-void init_match_schore(int);
+void init_match_schore(int, int);
 void end_match();
 void oponentPoint();
 void yourPoint();

@@ -2,9 +2,11 @@
 #include <time.h>
 #include <string.h>
 
-#include "MatchScore.h"
-#include "Const.h"
+#include "../src/MatchScore.h"
+#include "../src/Const.h"
 #include "TestHelper.h"
+
+static int best_of_sets =3;
 
 void opponent_is_not_you(){
     int inverted_you = !you;
@@ -19,7 +21,7 @@ void opponent_is_not_you(){
 
 void who_starts_serving_test(){
     //printf("*** who_starts_serving_test STARTED\n");
-    init_match_schore(opp);
+    init_match_schore(opp, best_of_sets);
 
     Score* score = get_current_score();
     if (score->who_serves == opp)
@@ -35,7 +37,7 @@ void who_starts_serving_test(){
 
 void opponent_point_test(){
     //printf("*** opponent_point_test STARTED\n");
-    init_match_schore(opp);
+    init_match_schore(opp, best_of_sets);
     
     oponentPoint();
 
@@ -53,7 +55,7 @@ void opponent_point_test(){
 
 void fifteen_all_test(){
     //printf("*** fifteen_all_test STARTED\n");
-    init_match_schore(opp);
+    init_match_schore(opp, best_of_sets);
     oponentPoint();
     yourPoint();
 
@@ -75,7 +77,7 @@ void fifteen_all_test(){
 
 void forty_fifteen_test(){
     //printf("*** fifteen_all_test STARTED\n");
-    init_match_schore(opp);
+    init_match_schore(opp, best_of_sets);
     oponentPoint();
     yourPoint();
     oponentPoint();
@@ -95,7 +97,7 @@ void forty_fifteen_test(){
 
 void advantage_test(){
     //printf("*** fifteen_all_test STARTED\n");
-    init_match_schore(opp);
+    init_match_schore(opp, best_of_sets);
     oponentPoint();
     yourPoint();
     oponentPoint();
@@ -125,7 +127,7 @@ void advantage_test(){
 
 
 void tie_break_test(){
-    init_match_schore(opp);
+    init_match_schore(opp, best_of_sets);
 
     // Score* current_score = get_current_score();
     // current_score->is_tie_break=true;
@@ -157,7 +159,7 @@ void tie_break_test(){
 }
 
 void five_four_games_test(){
-    init_match_schore(you);
+    init_match_schore(you, best_of_sets);
 
     make_game_for(opp);
     make_game_for(opp);
@@ -181,7 +183,7 @@ void five_four_games_test(){
 }
 
 void seven_six_games_test(){
-    init_match_schore(you);
+    init_match_schore(you, best_of_sets);
 
     make_game_for(opp);
     make_game_for(opp);
@@ -234,7 +236,7 @@ void seven_six_games_test(){
 }
 
 void who_serves_test(){
-    init_match_schore(you);
+    init_match_schore(you, best_of_sets);
 
     make_game_for(opp);
     make_game_for(opp);
@@ -254,7 +256,7 @@ void who_serves_test(){
 }
 
 void one_set_all_test(){
-    init_match_schore(you);
+    init_match_schore(you, best_of_sets);
 
     make_game_for(opp);
     make_game_for(opp);
@@ -286,7 +288,7 @@ void one_set_all_test(){
 }
 
 void match_is_over_test(){
-    init_match_schore(you);
+    init_match_schore(you, best_of_sets);
 
     make_game_for(opp);
     make_game_for(opp);
@@ -328,7 +330,7 @@ void match_is_over_test(){
 }
 
 void cancel_last_point_test(){
-    init_match_schore(you);
+    init_match_schore(you, best_of_sets);
     make_game_for(you);
     make_game_for(opp);
 

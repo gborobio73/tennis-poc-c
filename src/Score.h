@@ -14,6 +14,7 @@ typedef struct
     int games [2];
     Point points [2];
     int tie_break_points [2];
+    int best_of_sets;
 
 } Score;
 

@@ -9,6 +9,7 @@ void copy_score(Score* destination_score, Score* source_score){
 	destination_score->is_tie_break = source_score->is_tie_break;
     destination_score->match_is_over = source_score->match_is_over;
     destination_score->who_serves = source_score->who_serves;
+    destination_score->best_of_sets = source_score->best_of_sets;
 
     destination_score->sets[opp] = source_score->sets[opp];
     destination_score->sets[you] = source_score->sets[you];
@@ -23,6 +24,8 @@ void copy_score(Score* destination_score, Score* source_score){
 }
 
 void new_set(Score* new_score, int who_won){
+	int who_lost = !who_won;
+
 	new_score->points[opp] =love;
     new_score->points[you] =love;
 	new_score->tie_break_points[opp] =0;
@@ -31,7 +34,7 @@ void new_set(Score* new_score, int who_won){
 	new_score->games[opp] =0;
     new_score->games[you] =0;
     new_score->sets[who_won] ++;
-    if (new_score->sets[who_won]==2)
+    if (new_score->sets[who_won] + new_score->sets[who_lost] == new_score->best_of_sets)
     {
     	new_score->match_is_over = true;
     }
@@ -49,17 +52,17 @@ void new_game (Score* new_score, int who_won){
 
     if(new_score->games[who_won]  ==6)  {
     	//its over? always?
-		printf("game over. start new set\n" );
+		//printf("game over. start new set\n" );
     	new_set(new_score, who_won);
     }else if(new_score->games[who_won]  == 5){
     	if(new_score->games[who_lost] ==6){
 			new_score->games[who_won] ++;  
 			new_score->is_tie_break = true;			
-			printf("is tiebreak\n" );
+			//printf("is tiebreak\n" );
 
  		}else if(new_score->games[who_lost]  <=4){
         //its over
-        	printf("game over. who lost had 4 or less games. start new set\n" );
+        	//printf("game over. who lost had 4 or less games. start new set\n" );
         	new_set(new_score, who_won);
       	}else{
         	new_score->games[who_won] ++;
@@ -70,12 +73,12 @@ void new_game (Score* new_score, int who_won){
 }
 
 Score* calculate_new_score(Score* current_score, int who_won){
-
-    Score *new_score = malloc(sizeof(Score));
+	
+	Score *new_score = malloc(sizeof(Score));
     //printf("New score with address %p\n", (void*)new_score);
     copy_score(new_score, current_score);
     
-    //work on new_score
+	//work on new_score
     int who_lost = !who_won;
     // printf("who_won %d.\n", who_won);
     // printf("who_lost %d.\n", who_lost);
@@ -86,10 +89,10 @@ Score* calculate_new_score(Score* current_score, int who_won){
 			// printf("now has%d\n", new_score->tie_break_points[who_won]);	
 		}else{
 			if(new_score->tie_break_points[who_won] + 1 - new_score->tie_break_points[who_lost] >=2){
-				printf("End of tie break; new game. who_won had %d, who_lost had %d \n", new_score->tie_break_points[who_won], new_score->tie_break_points[who_lost]);
+				//printf("End of tie break; new game. who_won had %d, who_lost had %d \n", new_score->tie_break_points[who_won], new_score->tie_break_points[who_lost]);
 				new_game(new_score, who_won);				
 			}else{
-				printf("Continue, who_won had %d\n", new_score->tie_break_points[who_won]);
+				//printf("Continue, who_won had %d\n", new_score->tie_break_points[who_won]);
 				new_score->tie_break_points[who_won]++;				
 			}
 		}
