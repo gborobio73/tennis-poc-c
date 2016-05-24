@@ -1,4 +1,6 @@
 #include <pebble.h>
+#include "Const.h"
+#include "MatchScoreLayer.h"
 
 static Window *window;
 static TextLayer *text_layer;
@@ -23,16 +25,24 @@ static void click_config_provider(void *context) {
 
 static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
-  GRect bounds = layer_get_bounds(window_layer);
+  
 
-  text_layer = text_layer_create(GRect(0, 72, bounds.size.w, 20));
-  text_layer_set_text(text_layer, "Press a button");
-  text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
-  layer_add_child(window_layer, text_layer_get_layer(text_layer));
+  init_match_score_layer(window_layer);
+
+  // text_layer = text_layer_create(GRect(0, 72, bounds.size.w, 20));
+  // text_layer_set_text(text_layer, "Press a button");
+  // text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
+  
+  // layer_add_child(window_layer, points_layer.s_layer[opp]);
+  // layer_add_child(window_layer, points_layer.s_layer[you]);
+
+  
 }
 
 static void window_unload(Window *window) {
-  text_layer_destroy(text_layer);
+  	destroy_match_score_layer();
+	// layer_destroy(points_layer.s_layer[opp]);
+	// layer_destroy(points_layer.s_layer[you]);
 }
 
 static void init(void) {
@@ -53,7 +63,7 @@ static void deinit(void) {
 int main(void) {
   init();
 
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "Done initializing, pushed window: %p", window);
+  //APP_LOG(APP_LOG_LEVEL_DEBUG, "Done initializing, pushed window: %p", window);
 
   app_event_loop();
   deinit();
