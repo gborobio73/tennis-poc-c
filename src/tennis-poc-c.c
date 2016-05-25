@@ -1,20 +1,27 @@
 #include <pebble.h>
 #include "Const.h"
 #include "MatchScoreLayer.h"
+#include "MatchScore.h"
+#include "Score.h"
 
 static Window *window;
-static TextLayer *text_layer;
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
-  text_layer_set_text(text_layer, "Select");
+	cancel_last_point();
+	Score* score = get_current_score();	
+	match_score_layer_draw_score(score);
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
-  text_layer_set_text(text_layer, "Up");
+	oponentPoint();
+	Score* score = get_current_score();	
+	match_score_layer_draw_score(score);
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-  text_layer_set_text(text_layer, "Down");
+	yourPoint();
+	Score* score = get_current_score();	
+	match_score_layer_draw_score(score);
 }
 
 static void click_config_provider(void *context) {
@@ -26,23 +33,19 @@ static void click_config_provider(void *context) {
 static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   
-
   init_match_score_layer(window_layer);
 
-  // text_layer = text_layer_create(GRect(0, 72, bounds.size.w, 20));
-  // text_layer_set_text(text_layer, "Press a button");
-  // text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
-  
-  // layer_add_child(window_layer, points_layer.s_layer[opp]);
-  // layer_add_child(window_layer, points_layer.s_layer[you]);
+  init_match_schore(opp, 3);
+  Score* score = get_current_score();
 
-  
+  match_score_layer_draw_score(score);
+
 }
 
 static void window_unload(Window *window) {
   	destroy_match_score_layer();
-	// layer_destroy(points_layer.s_layer[opp]);
-	// layer_destroy(points_layer.s_layer[you]);
+
+  	end_match();
 }
 
 static void init(void) {
